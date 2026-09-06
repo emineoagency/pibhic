@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Donar — Primera Iglesia Bautista Haitiana Independiente en Chile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:#FAF7F1;color:#0F1E3D;min-height:100vh}
+.font-display{font-family:'Fraunces','Georgia',serif}
+a{text-decoration:none;color:inherit}
+
+.navy{background:#0F1E3D}
+.gold{background:#D9A441}
+.gold-text{color:#D9A441}
+.gold-light{color:#F0CA8E}
+
+header{background:#0F1E3D;padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:center}
+.brand{color:#fff;font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;text-align:center}
+
+main{max-width:640px;margin:0 auto;padding:3rem 1.25rem 4rem}
+
+.hero-donar{text-align:center;margin-bottom:2.5rem}
+.hero-donar p.eyebrow{color:#E0793C;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;margin-bottom:.6rem}
+.hero-donar h1{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:600;color:#0F1E3D;margin-bottom:.8rem}
+.hero-donar p.sub{color:#5a5248;font-size:.92rem;line-height:1.7;max-width:46ch;margin:0 auto}
+
+.card{background:#fff;border-radius:1rem;padding:1.8rem;box-shadow:0 8px 24px rgba(15,30,61,.08);margin-bottom:1.5rem}
+.card h2{font-family:'Fraunces',serif;font-size:1.15rem;color:#0F1E3D;margin-bottom:.4rem}
+.card p.desc{color:#5a5248;font-size:.85rem;margin-bottom:1.2rem;line-height:1.6}
+
+.btn-paypal{display:block;text-align:center;background:#D9A441;color:#0F1E3D;font-weight:700;padding:.95rem;border-radius:.6rem;font-size:.95rem;transition:background .2s}
+.btn-paypal:hover{background:#B3822C}
+
+.bank-row{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(15,30,61,.08);font-size:.87rem}
+.bank-row:last-child{border-bottom:none}
+.bank-row .label{color:#5a5248;font-weight:600}
+.bank-row .value{color:#0F1E3D;font-weight:700;text-align:right}
+
+.back-link{display:block;text-align:center;margin-top:2rem;color:#5a5248;font-size:.85rem;text-decoration:underline;text-underline-offset:3px}
+.back-link:hover{color:#0F1E3D}
+
+footer{text-align:center;padding:2rem 1.2rem;color:rgba(15,30,61,.4);font-size:.75rem}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="brand">Primera Iglesia Bautista Haitiana Independiente en Chile</p>
+</header>
+
+<main>
+  <div class="hero-donar">
+    <p class="eyebrow">Nuestro Gran Proyecto</p>
+    <h1>Apoya nuestro proyecto</h1>
+    <p class="sub">Cada aporte nos acerca a tener un local propio donde toda nuestra comunidad pueda crecer. Gracias por caminar con nosotros.</p>
+  </div>
+
+  <div class="card">
+    <h2>Donar en línea</h2>
+    <p class="desc">Elige el monto que deseas donar y paga con tarjeta o PayPal.</p>
+    <div class="fgrp" style="margin-bottom:1rem">
+      <label style="display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#5a5248;font-weight:700;margin-bottom:.4rem">Monto a donar (USD)</label>
+      <input type="number" id="monto-donacion" min="1" step="1" placeholder="Ej: 20" style="width:100%;border:1.5px solid rgba(15,30,61,.15);padding:.7rem .9rem;border-radius:.5rem;font-size:1rem;outline:none"/>
+    </div>
+    <div id="paypal-donar-btn"></div>
+    <p id="donar-msg" style="font-size:.78rem;margin-top:.6rem;display:none"></p>
+  </div>
+
+  <div class="card">
+    <h2>Transferencia bancaria</h2>
+    <p class="desc">Para aportes directos desde tu banco en Chile.</p>
+    <div class="bank-row"><span class="label">Titular</span><span class="value">Faustin Nalus</span></div>
+    <div class="bank-row"><span class="label">Banco</span><span class="value">Mercado Pago</span></div>
+    <div class="bank-row"><span class="label">Tipo de cuenta</span><span class="value">Cuenta Vista</span></div>
+    <div class="bank-row"><span class="label">N° de cuenta</span><span class="value">1011574894</span></div>
+    <div class="bank-row"><span class="label">RUT</span><span class="value">65.220.683-2</span></div>
+    <div class="bank-row"><span class="label">Email de confirmación</span><span class="value">ebaptistehaitienne@gmail.com</span></div>
+  </div>
+
+  <a href="index.html" class="back-link">← Volver al inicio</a>
+</main>
+
+<footer>© 2026 · Primera Iglesia Bautista Haitiana Independiente en Chile</footer>
+
+<script src="https://www.paypal.com/sdk/js?client-id=BAAlRA-KH-wrhy9i5TmYHCh0gK6iiKVd5JJEA40_gZyHbevUfUJgu-1QIu8llfYF30QTVHDZn7237cfCyk&currency=USD&enable-funding=card"></script>
+<script>
+paypal.Buttons({
+  style: { shape: 'rect', color: 'gold', layout: 'vertical' },
+  createOrder: function(data, actions) {
+    const monto = document.getElementById('monto-donacion').value;
+    if (!monto || Number(monto) <= 0) {
+      const msg = document.getElementById('donar-msg');
+      msg.textContent = 'Por favor ingresa un monto válido antes de continuar.';
+      msg.style.cssText = 'display:block;color:#B23A2E;font-size:.78rem;margin-top:.6rem';
+      return Promise.reject(new Error('Monto invalido'));
+    }
+    return actions.order.create({
+      purchase_units: [{ amount: { value: Number(monto).toFixed(2) }, description: 'Donación — Nuestro Gran Proyecto' }]
+    });
+  },
+  onApprove: function(data, actions) {
+    return actions.order.capture().then(function() {
+      const msg = document.getElementById('donar-msg');
+      msg.textContent = '¡Gracias por tu generosa donación! Dios te bendiga.';
+      msg.style.cssText = 'display:block;color:#3F6B4A;font-size:.85rem;font-weight:700;margin-top:.8rem';
+      document.getElementById('paypal-donar-btn').style.display = 'none';
+    });
+  },
+  onError: function() {
+    const msg = document.getElementById('donar-msg');
+    msg.textContent = 'Hubo un error al procesar tu donación. Intenta de nuevo.';
+    msg.style.cssText = 'display:block;color:#B23A2E;font-size:.78rem;margin-top:.6rem';
+  }
+}).render('#paypal-donar-btn');
+</script>
+</body>
+</html>
