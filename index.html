@@ -82,9 +82,28 @@ body{font-family:'Manrope',sans-serif}
      HERO
 ============================================================ -->
 <section id="inicio" class="min-h-[100svh] flex items-end pb-16 pt-32 relative overflow-hidden">
-  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover" onerror="this.onerror=null;this.src='https://videos.pexels.com/video-files/16863297/16863297-hd_1920_1080_30fps.mp4'">
+  <video id="heroVideo" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
     <source src="hero-video.mp4" type="video/mp4"/>
   </video>
+  <script>
+    (function(){
+      var v = document.getElementById('heroVideo');
+      var fallback = 'https://videos.pexels.com/video-files/16863297/16863297-hd_1920_1080_30fps.mp4';
+      var used = false;
+      function useFallback(){
+        if (used) return;
+        used = true;
+        v.innerHTML = '';
+        v.src = fallback;
+        v.load();
+        v.play().catch(function(){});
+      }
+      v.addEventListener('error', useFallback, true);
+      var src = v.querySelector('source');
+      if (src) src.addEventListener('error', useFallback);
+      setTimeout(function(){ if (v.readyState === 0) useFallback(); }, 3000);
+    })();
+  </script>
   <div class="absolute inset-0 bg-navy-dark/70"></div>
   <div class="max-w-5xl mx-auto px-5 sm:px-8 w-full relative z-10">
     <h1 class="font-display text-white text-3xl sm:text-5xl md:text-6xl leading-[1.08] font-semibold max-w-4xl">
@@ -260,14 +279,29 @@ body{font-family:'Manrope',sans-serif}
     <div class="reveal">
       <p class="font-display text-xl font-semibold text-navy mb-4">Nuestra comunidad en video</p>
       <div class="grid sm:grid-cols-3 gap-4">
-        <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/qL21AYBQcKI" title="Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="aspect-video rounded-lg overflow-hidden shadow-lg yt-lazy" data-yt="qL21AYBQcKI" onclick="cargarVideo(this)" style="cursor:pointer;position:relative">
+          <img src="https://img.youtube.com/vi/qL21AYBQcKI/hqdefault.jpg" alt="Video 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,30,61,.25)">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#0F1E3D"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
-        <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/qo6dRmBx8do" title="Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="aspect-video rounded-lg overflow-hidden shadow-lg yt-lazy" data-yt="qo6dRmBx8do" onclick="cargarVideo(this)" style="cursor:pointer;position:relative">
+          <img src="https://img.youtube.com/vi/qo6dRmBx8do/hqdefault.jpg" alt="Video 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,30,61,.25)">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#0F1E3D"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
-        <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/hYPGwvb4f4o" title="Video 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="aspect-video rounded-lg overflow-hidden shadow-lg yt-lazy" data-yt="hYPGwvb4f4o" onclick="cargarVideo(this)" style="cursor:pointer;position:relative">
+          <img src="https://img.youtube.com/vi/hYPGwvb4f4o/hqdefault.jpg" alt="Video 3" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"/>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(15,30,61,.25)">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#0F1E3D"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -290,7 +324,7 @@ body{font-family:'Manrope',sans-serif}
     </div>
     <div class="reveal">
       <p class="text-gold-light text-[11px] tracking-[0.25em] uppercase font-bold mb-2">Dirección</p>
-      <p class="text-white/80 text-sm leading-relaxed">Reina María 2141<br/>Comuna de Independencia, Santiago de Chile</p>
+      <p class="text-white/80 text-sm leading-relaxed">Santiago, Región Metropolitana, Chile<br/><span class="text-white/40">(Dirección exacta a confirmar)</span></p>
     </div>
   </div>
 </section>
@@ -319,6 +353,12 @@ const ham = document.getElementById('ham');
 const mobileNav = document.getElementById('mobileNav');
 ham.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
 document.querySelectorAll('#mobileNav a').forEach(a => a.addEventListener('click', () => mobileNav.classList.add('hidden')));
+
+// Chargement differe des videos YouTube (au clic seulement)
+function cargarVideo(el) {
+  const id = el.getAttribute('data-yt');
+  el.innerHTML = `<iframe class="w-full h-full" style="position:absolute;inset:0" src="https://www.youtube.com/embed/${id}?autoplay=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+}
 
 // Reveal au scroll
 const obs = new IntersectionObserver((entries) => {
