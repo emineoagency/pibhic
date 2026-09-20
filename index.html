@@ -35,24 +35,16 @@ body{font-family:'Manrope',sans-serif}
 .inset-0{top:0;right:0;bottom:0;left:0}
 .z-10{z-index:10}
 .bg-navy-dark\/70{background-color:rgba(10,21,48,.7)}
-/* Carrousel de galería (styles personnalisés, hors Tailwind) */
-.gallery-carousel{position:relative;border-radius:1.25rem;overflow:hidden;box-shadow:0 20px 25px -5px rgba(0,0,0,.15),0 8px 10px -6px rgba(0,0,0,.1);background:#0F1E3D}
-.gallery-track{position:relative;width:100%;aspect-ratio:16/9}
-.gallery-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
-.gallery-slide.active{opacity:1;z-index:1}
-.gallery-slide img{width:100%;height:100%;object-fit:cover;display:block}
-.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;z-index:5;border:none}
-.gallery-arrow:hover{background:#fff}
-.gallery-arrow.prev{left:14px}
-.gallery-arrow.next{right:14px}
-.gallery-counter{position:absolute;bottom:14px;right:16px;z-index:5;background:rgba(15,30,61,.55);color:#fff;font-size:.7rem;letter-spacing:.05em;padding:.3rem .6rem;border-radius:999px}
-.gallery-thumbs{display:flex;gap:.6rem;overflow-x:auto;padding:1rem;background:#0a1530}
-.gallery-thumbs::-webkit-scrollbar{height:6px}
-.gallery-thumbs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px}
-.gallery-thumb{flex:0 0 auto;width:84px;height:64px;border-radius:.6rem;overflow:hidden;cursor:pointer;opacity:.5;transition:opacity .2s,outline .2s;outline:2px solid transparent;outline-offset:2px}
-.gallery-thumb.active{opacity:1;outline-color:#D9A441}
-.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-@media (max-width:640px){.gallery-arrow{width:36px;height:36px}.gallery-thumb{width:64px;height:48px}}
+/* Cadre photo pleine hauteur (sans recadrage) pour portraits verticaux */
+.portrait-frame{width:100%;height:440px;border-radius:1rem;overflow:hidden;background:linear-gradient(180deg,#0F1E3D,#16295A);display:flex;align-items:center;justify-content:center}
+.portrait-frame img{width:100%;height:100%;object-fit:contain}
+/* Défilement continu de la galería (marquee, sans flèches ni numéros) */
+.gallery-marquee{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.gallery-marquee-track{display:flex;gap:1.1rem;width:max-content;animation:gallery-scroll 55s linear infinite}
+.gallery-marquee:hover .gallery-marquee-track{animation-play-state:paused}
+.gallery-marquee-track img{height:320px;width:auto;flex:0 0 auto;border-radius:1rem;object-fit:cover;box-shadow:0 15px 25px -8px rgba(0,0,0,.2)}
+@keyframes gallery-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:640px){.gallery-marquee-track img{height:190px}}
 </style>
 </head>
 <body class="bg-cream text-navy">
@@ -176,7 +168,9 @@ body{font-family:'Manrope',sans-serif}
 
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center mt-16">
     <div class="reveal">
-      <img src="pastor-fernando-campillay.png" alt="Pastor Fernando Campillay Cerda" class="w-full h-[440px] object-cover rounded-2xl shadow-xl"/>
+      <div class="portrait-frame shadow-xl">
+        <img src="pastor-fernando-campillay.png" alt="Pastor Fernando Campillay Cerda"/>
+      </div>
     </div>
     <div class="reveal">
       <p class="text-ember text-xs tracking-[0.25em] uppercase font-bold mb-3">En memoria</p>
@@ -292,43 +286,38 @@ body{font-family:'Manrope',sans-serif}
     <p class="text-ember text-xs tracking-[0.25em] uppercase font-bold mb-3 reveal">Galería</p>
     <h2 class="font-display text-3xl sm:text-4xl font-semibold text-navy mb-12 reveal">Momentos de nuestra comunidad</h2>
 
-    <div class="reveal gallery-carousel mb-12">
-      <div class="gallery-track" id="galleryTrack">
-        <div class="gallery-slide active"><img src="intervenants-culte.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=1200&q=80'" alt="Culto dominical"/></div>
-        <div class="gallery-slide"><img src="communaute-familles.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="Familias de la comunidad"/></div>
-        <div class="gallery-slide"><img src="chorale-louange.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=1200&q=80'" alt="Coro de alabanza"/></div>
-        <div class="gallery-slide"><img src="enseignement-enfants.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=1200&q=80'" alt="Escuela dominical"/></div>
-        <div class="gallery-slide"><img src="groupe-jeunes-pastor.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="Jóvenes con el pastor"/></div>
-        <div class="gallery-slide"><img src="pastor-familia.jpg" alt="El pastor con su familia"/></div>
-        <div class="gallery-slide"><img src="culte-assemblee-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=1200&q=80'" alt="Vista de la asamblea en culto"/></div>
-        <div class="gallery-slide"><img src="dames-uniforme-rose.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="Grupo de damas de la iglesia"/></div>
-        <div class="gallery-slide"><img src="culte-predication.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="El pastor predicando"/></div>
-        <div class="gallery-slide"><img src="assemblee-foule.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=1200&q=80'" alt="Sala llena de fieles"/></div>
-        <div class="gallery-slide"><img src="moment-priere.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=1200&q=80'" alt="Momento de oración"/></div>
-        <div class="gallery-slide"><img src="pastor-equipe.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="El pastor con el equipo de líderes"/></div>
-        <div class="gallery-slide"><img src="famille-sourires.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="Foto grupal con el pastor"/></div>
-        <div class="gallery-slide"><img src="groupe-dames-tableau.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=1200&q=80'" alt="Grupo de damas reunidas"/></div>
-        <div class="gallery-slide"><img src="action-sociale.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=1200&q=80'" alt="Acción social — preparación de paquetes comunitarios"/></div>
-        <button class="gallery-arrow prev" id="galleryPrev" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0F1E3D"><path d="M15 18l-6-6 6-6v12z"/></svg></button>
-        <button class="gallery-arrow next" id="galleryNext" aria-label="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0F1E3D"><path d="M9 6l6 6-6 6V6z"/></svg></button>
-        <span class="gallery-counter" id="galleryCounter">1 / 15</span>
-      </div>
-      <div class="gallery-thumbs" id="galleryThumbs">
-        <div class="gallery-thumb active"><img src="intervenants-culte.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="communaute-familles.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="chorale-louange.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="enseignement-enfants.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="groupe-jeunes-pastor.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="pastor-familia.jpg" alt=""/></div>
-        <div class="gallery-thumb"><img src="culte-assemblee-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="dames-uniforme-rose.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="culte-predication.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="assemblee-foule.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="moment-priere.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="pastor-equipe.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="famille-sourires.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="groupe-dames-tableau.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=200&q=80'" alt=""/></div>
-        <div class="gallery-thumb"><img src="action-sociale.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=200&q=80'" alt=""/></div>
+    <div class="reveal gallery-marquee">
+      <div class="gallery-marquee-track">
+        <img src="intervenants-culte.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Culto dominical"/>
+        <img src="communaute-familles.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Familias de la comunidad"/>
+        <img src="chorale-louange.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Coro de alabanza"/>
+        <img src="enseignement-enfants.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=900&q=80'" alt="Escuela dominical"/>
+        <img src="groupe-jeunes-pastor.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Jóvenes con el pastor"/>
+        <img src="pastor-familia.jpg" alt="El pastor con su familia"/>
+        <img src="culte-assemblee-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Vista de la asamblea en culto"/>
+        <img src="dames-uniforme-rose.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Grupo de damas de la iglesia"/>
+        <img src="culte-predication.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="El pastor predicando"/>
+        <img src="assemblee-foule.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Sala llena de fieles"/>
+        <img src="moment-priere.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Momento de oración"/>
+        <img src="pastor-equipe.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="El pastor con el equipo de líderes"/>
+        <img src="famille-sourires.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Foto grupal con el pastor"/>
+        <img src="groupe-dames-tableau.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Grupo de damas reunidas"/>
+        <img src="action-sociale.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=900&q=80'" alt="Acción social — preparación de paquetes comunitarios"/>
+        <img src="intervenants-culte.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Culto dominical"/>
+        <img src="communaute-familles.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Familias de la comunidad"/>
+        <img src="chorale-louange.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Coro de alabanza"/>
+        <img src="enseignement-enfants.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=900&q=80'" alt="Escuela dominical"/>
+        <img src="groupe-jeunes-pastor.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Jóvenes con el pastor"/>
+        <img src="pastor-familia.jpg" alt="El pastor con su familia"/>
+        <img src="culte-assemblee-1.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Vista de la asamblea en culto"/>
+        <img src="dames-uniforme-rose.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Grupo de damas de la iglesia"/>
+        <img src="culte-predication.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="El pastor predicando"/>
+        <img src="assemblee-foule.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Sala llena de fieles"/>
+        <img src="moment-priere.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1776091104217-02e3732a4a81?w=900&q=80'" alt="Momento de oración"/>
+        <img src="pastor-equipe.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="El pastor con el equipo de líderes"/>
+        <img src="famille-sourires.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Foto grupal con el pastor"/>
+        <img src="groupe-dames-tableau.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1682263556627-181761ed74b1?w=900&q=80'" alt="Grupo de damas reunidas"/>
+        <img src="action-sociale.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1702905709201-0950a1a3190f?w=900&q=80'" alt="Acción social — preparación de paquetes comunitarios"/>
       </div>
     </div>
 
@@ -421,40 +410,6 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Carrousel de la galería
-(function(){
-  const track = document.getElementById('galleryTrack');
-  if (!track) return;
-  const slides = track.querySelectorAll('.gallery-slide');
-  const thumbs = document.querySelectorAll('.gallery-thumb');
-  const counter = document.getElementById('galleryCounter');
-  let idx = 0, timer;
-  function go(i){
-    idx = (i + slides.length) % slides.length;
-    slides.forEach((s,n) => s.classList.toggle('active', n === idx));
-    thumbs.forEach((t,n) => t.classList.toggle('active', n === idx));
-    if (counter) counter.textContent = (idx + 1) + ' / ' + slides.length;
-    const activeThumb = thumbs[idx];
-    if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-  function resetTimer(){
-    clearInterval(timer);
-    timer = setInterval(() => go(idx + 1), 5000);
-  }
-  const prevBtn = document.getElementById('galleryPrev');
-  const nextBtn = document.getElementById('galleryNext');
-  if (prevBtn) prevBtn.addEventListener('click', () => { go(idx - 1); resetTimer(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { go(idx + 1); resetTimer(); });
-  thumbs.forEach((t, n) => t.addEventListener('click', () => { go(n); resetTimer(); }));
-  const carousel = document.querySelector('.gallery-carousel');
-  if (carousel) {
-    carousel.addEventListener('mouseenter', () => clearInterval(timer));
-    carousel.addEventListener('mouseleave', resetTimer);
-  }
-  go(0);
-  resetTimer();
-})();
 </script>
 </body>
 </html>
