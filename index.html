@@ -61,6 +61,15 @@ body{font-family:'Manrope',sans-serif}
 .obreros-grid .photo-slot img{object-position:center 28%}
 .obreros-grid .photo-slot{height:260px}
 @media (min-width:768px){.obreros-grid{grid-template-columns:repeat(5,1fr)}.obreros-grid .photo-slot:last-child{grid-column:auto}.obreros-grid .photo-slot{height:300px}}
+
+/* Section video du projet */
+.video-frame{position:relative;width:100%;max-width:360px;margin:0 auto;aspect-ratio:9/16;border-radius:1.2rem;overflow:hidden;background:linear-gradient(180deg,#0F1E3D,#16295A);box-shadow:0 20px 35px -10px rgba(0,0,0,.35);background-size:cover;background-position:center;cursor:pointer}
+.video-frame .play{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;border-radius:50%;background:#D9A441;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.35);transition:transform .2s}
+.video-frame:hover .play{transform:scale(1.08)}
+.video-frame .play::before{content:"";margin-left:6px;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #0F1E3D}
+.video-frame.no-video{cursor:default}
+.video-frame.no-video .play{display:none}
+.video-frame.no-video::after{content:"Video próximamente";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(240,202,142,.85);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
 </style>
 </head>
 <body class="bg-cream text-navy">
@@ -343,6 +352,23 @@ body{font-family:'Manrope',sans-serif}
 </section>
 
 <!-- ============================================================
+     VIDEO DEL PROYECTO
+============================================================ -->
+<section id="video-proyecto" class="py-24 px-5 sm:px-8 bg-cream">
+  <div class="max-w-5xl mx-auto text-center">
+    <p class="text-ember text-xs tracking-[0.25em] uppercase font-bold mb-3 reveal">Construyamos juntos</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-navy mb-5 reveal">Ayúdanos a levantar nuestra nueva iglesia</h2>
+    <p class="text-slate-600 max-w-2xl mx-auto leading-relaxed mb-10 reveal">
+      Mira este mensaje y conoce el sueño de nuestra comunidad. Cada aporte nos acerca a tener un local propio donde toda la congregación pueda crecer.
+    </p>
+    <div class="video-frame reveal" id="videoProyecto" data-yt="QRZtyN5eyLU" onclick="cargarVideo(this)"><span class="play"></span></div>
+    <div class="reveal" style="margin-top:2.5rem">
+      <a href="donar.html" class="btn-more">Quiero contribuir <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      GALERÍA MULTIMEDIA
 ============================================================ -->
 <section id="galeria" class="py-24 px-5 sm:px-8 bg-cream">
@@ -466,8 +492,18 @@ document.querySelectorAll('#mobileNav a').forEach(a => a.addEventListener('click
 // Chargement differe des videos YouTube (au clic seulement)
 function cargarVideo(el) {
   const id = el.getAttribute('data-yt');
-  el.innerHTML = `<iframe class="w-full h-full" style="position:absolute;inset:0" src="https://www.youtube.com/embed/${id}?autoplay=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  if (!id) return;
+  el.innerHTML = `<iframe class="w-full h-full" style="position:absolute;inset:0" src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 }
+
+// Video del proyecto: miniatura si hay ID, si no 'próximamente'
+(function(){
+  const v = document.getElementById('videoProyecto');
+  if (!v) return;
+  const id = v.getAttribute('data-yt');
+  if (id) { v.style.backgroundImage = 'url(https://img.youtube.com/vi/' + id + '/hqdefault.jpg)'; }
+  else { v.classList.add('no-video'); }
+})();
 
 // Reveal au scroll
 const obs = new IntersectionObserver((entries) => {
