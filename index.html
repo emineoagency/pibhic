@@ -45,6 +45,22 @@ body{font-family:'Manrope',sans-serif}
 .gallery-marquee-track img{height:320px;width:auto;flex:0 0 auto;border-radius:1rem;object-fit:cover;box-shadow:0 15px 25px -8px rgba(0,0,0,.2)}
 @keyframes gallery-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (max-width:640px){.gallery-marquee-track img{height:190px}}
+
+/* Sections Pastor Wilbert Michel y Obreros */
+.sec-white{background:#fff}
+.photo-slot{position:relative;border-radius:1rem;overflow:hidden;background:linear-gradient(180deg,#0F1E3D,#16295A);box-shadow:0 15px 25px -8px rgba(0,0,0,.2)}
+.photo-slot img{display:block;width:100%;height:100%;object-fit:cover}
+.photo-slot.is-empty img{display:none}
+.photo-slot.is-empty::after{content:"Foto próximamente";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(240,202,142,.8);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+.btn-more{display:inline-flex;align-items:center;gap:.5rem;background:#0F1E3D;color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:.8rem 1.4rem;border-radius:999px;transition:background .2s}
+.btn-more:hover{background:#D9A441;color:#0F1E3D}
+.couple-slot{height:460px}
+.couple-slot img{object-fit:contain}
+.obreros-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem}
+.obreros-grid .photo-slot:last-child{grid-column:1/-1}
+.obreros-grid .photo-slot img{object-position:center 28%}
+.obreros-grid .photo-slot{height:260px}
+@media (min-width:768px){.obreros-grid{grid-template-columns:repeat(5,1fr)}.obreros-grid .photo-slot:last-child{grid-column:auto}.obreros-grid .photo-slot{height:300px}}
 </style>
 </head>
 <body class="bg-cream text-navy">
@@ -64,6 +80,8 @@ body{font-family:'Manrope',sans-serif}
     <nav class="hidden md:flex items-center gap-7 text-[13px] tracking-wide text-white/75">
       <a href="#inicio" class="hover:text-gold-light transition">Inicio</a>
       <a href="#quienes-somos" class="hover:text-gold-light transition">Quiénes Somos</a>
+      <a href="#pastor-wilbert" class="hover:text-gold-light transition">Pastores</a>
+      <a href="#obreros" class="hover:text-gold-light transition">Obreros</a>
       <a href="#trabajo-social" class="hover:text-gold-light transition">Ministerios</a>
       <a href="#jovenes-ministerio" class="hover:text-gold-light transition">Jóvenes</a>
       <a href="#proyecto" class="hover:text-gold-light transition">Nuestro Proyecto</a>
@@ -80,6 +98,8 @@ body{font-family:'Manrope',sans-serif}
   <div id="mobileNav" class="hidden md:hidden bg-navy-dark border-t border-white/5 px-5 py-4 flex flex-col gap-4 text-sm text-white/80">
     <a href="#inicio">Inicio</a>
     <a href="#quienes-somos">Quiénes Somos</a>
+    <a href="#pastor-wilbert">Pastores</a>
+    <a href="#obreros">Obreros</a>
     <a href="#trabajo-social">Ministerios</a>
     <a href="#jovenes-ministerio">Jóvenes</a>
     <a href="#proyecto">Nuestro Proyecto</a>
@@ -178,6 +198,50 @@ body{font-family:'Manrope',sans-serif}
       <p class="text-slate-600 leading-relaxed">
         Fundador de nuestra iglesia en 2010, el pastor Fernando Campillay Cerda condujo la congregación con una disposición particular para recibir y acompañar a personas provenientes de distintos lugares. Su legado de apertura y acogida forma parte de la identidad que hemos heredado, y su ejemplo sigue guiando el camino que hoy continúa el pastor Faustin Nalus.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PASTOR WILBERT MICHEL Y SU ESPOSA
+============================================================ -->
+<section id="pastor-wilbert" class="py-24 px-5 sm:px-8 sec-white">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <div class="photo-slot couple-slot">
+        <img src="pastor-wilbert-michel-esposa.jpg" alt="Pastor Wilbert Michel y su esposa" onerror="this.parentNode.classList.add('is-empty')"/>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="text-ember text-xs tracking-[0.25em] uppercase font-bold mb-3">Nuestro liderazgo</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-navy mb-3">Pastor Wilbert Michel y su esposa</h2>
+      <p class="font-display text-lg text-navy/70 italic mb-6">Un ministerio de acompañamiento, amor y compromiso con la Iglesia</p>
+      <p class="text-slate-600 leading-relaxed mb-8">
+        En la historia de nuestra congregación, Dios ha puesto personas que han sido instrumentos de bendición, orientación y fortaleza espiritual. Entre ellas, reconocemos con profundo agradecimiento al Pastor Wilbert Michel y a su amada esposa, quienes han demostrado un compromiso especial con nuestra iglesia y con el fortalecimiento de la obra de Dios en Chile.
+      </p>
+      <a href="pastor-wilbert.html" class="btn-more">Leer el mensaje completo <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OBREROS
+============================================================ -->
+<section id="obreros" class="py-24 px-5 sm:px-8 bg-cream">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-ember text-xs tracking-[0.25em] uppercase font-bold mb-3 reveal">Servir con las manos</p>
+    <h2 class="font-display text-3xl sm:text-4xl font-semibold text-navy mb-3 reveal">Nuestros Obreros</h2>
+    <p class="font-display text-lg text-navy/70 italic mb-6 reveal">Manos dispuestas a servir, corazones comprometidos con la obra de Dios</p>
+    <p class="text-slate-600 max-w-2xl leading-relaxed mb-8 reveal">
+      En la Primera Iglesia Bautista Haitiana Independiente en Chile, reconocemos con gratitud el trabajo y la dedicación de nuestros obreros, hombres y mujeres que han demostrado compromiso, responsabilidad y disposición para contribuir al crecimiento de nuestra congregación.
+    </p>
+    <a href="obreros.html" class="btn-more reveal">Leer el mensaje completo <span aria-hidden="true">→</span></a>
+    <div class="obreros-grid">
+      <div class="photo-slot reveal"><img src="obrero-1.jpg" alt="Obreros de la iglesia" loading="lazy" onerror="this.parentNode.classList.add('is-empty')"/></div>
+      <div class="photo-slot reveal"><img src="obrero-2.jpg" alt="Obreros de la iglesia" loading="lazy" onerror="this.parentNode.classList.add('is-empty')"/></div>
+      <div class="photo-slot reveal"><img src="obrero-3.jpg" alt="Obreros de la iglesia" loading="lazy" onerror="this.parentNode.classList.add('is-empty')"/></div>
+      <div class="photo-slot reveal"><img src="obrero-4.jpg" alt="Obreros de la iglesia" loading="lazy" onerror="this.parentNode.classList.add('is-empty')"/></div>
+      <div class="photo-slot reveal"><img src="obrero-5.jpg" alt="Obreros de la iglesia" loading="lazy" onerror="this.parentNode.classList.add('is-empty')"/></div>
     </div>
   </div>
 </section>
